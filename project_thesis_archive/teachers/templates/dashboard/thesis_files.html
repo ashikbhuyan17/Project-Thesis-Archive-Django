@@ -1,0 +1,47 @@
+{% extends 'teacher_base.html' %}
+{% block title %}Thesis Files | {{ block.super }}{% endblock %}
+{% load static %}
+{% block content %}
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="{% url 'teacher_dashboard' %}">Teacher Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Search Result</li>
+          </ol>
+          <br>
+            <h3>Showing result for:</h3>
+            <div class="form-group">
+                <label>Semester: {{ get_method.semester_name  }}</label>
+            </div>
+            <div class="form-group">
+                <label>Section: {{ get_method.section  }}</label>
+            </div>
+            <div class="form-group">
+                <label>Course Name: {{ get_method.course_name  }}</label>
+            </div>
+            <div class="form-group">
+                <label>Course Code: {{ get_method.course_code  }}</label>
+            </div>
+          <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Student ID</th>
+              <th scope="col">Thesis Title</th>
+              <th scope="col">Description</th>
+              <th scope="col">Thesis File</th>
+              <th scope="col">Document</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for thesis in theses %}
+             <tr>
+                  <td>{{ thesis.student_id }}</td>
+                  <td>{{ thesis.thesis_title }}</td>
+                  <td>{{ thesis.description }}</td>
+                  <td><a href="{{ thesis.thesis_file.url }}">Download</a></td>
+                  <td><a href="{{ thesis.document.url }}">Download</a></td>
+             </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+{% endblock %}

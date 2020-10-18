@@ -1,0 +1,78 @@
+{% extends 'teacher_base.html' %}
+{% block title %}Thesis Criteria | {{ block.super }}{% endblock %}
+{% load static %}
+{% block content %}
+ <!-- Breadcrumbs-->
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="{% url 'teacher_dashboard' %}">Teacher Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Thesis Criteria</li>
+          </ol>
+          <br>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                  <h2 class="text-center"><strong>Select Criteria For Thesis</strong></h2>
+                  <form method="get" action="{% url 'thesis_files' %}">
+                      <div class="form-group">
+                      <label for="exampleInputEmail1">Select Semester</label>
+                        <select class="form-control" name="semester_name" required>
+                          <option selected disabled>--Select--</option>
+                            {% if semester_name %}
+                                {% for semester in semester_name %}
+                                    <option>{{ semester.semester_name }}</option>
+                                {% endfor %}
+                            {% else %}
+                                <option>Not Available</option>
+                            {% endif %}
+                        </select>
+                      </div>
+                    <div class="form-group">
+                      <label>Select Course Name</label>
+                        <select class="form-control" name="course_name" required>
+                          <option selected disabled>--Select--</option>
+                            {% if course_name %}
+                                {% for course in course_name %}
+                                    <option>{{ course.course_name }}</option>
+                                {% endfor %}
+                            {% else %}
+                                <option>Not Available</option>
+                            {% endif %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                      <label>Select Course Code</label>
+                        <select class="form-control" name="course_code">
+                          <option selected disabled>--Select--</option>
+                            {% if semester_name %}
+                                {% for code in course_code %}
+                                    <option>{{ code.course_code }}</option>
+                                {% endfor %}
+                            {% else %}
+                                <option>Not Available</option>
+                            {% endif %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                      <label>Select Section</label>
+                        <select class="form-control" name="section" required>
+                          <option selected disabled>--Select--</option>
+                            {% if section %}
+                                {% for sec in section %}
+                                    <option>{{ sec.section }}</option>
+                                {% endfor %}
+                            {% else %}
+                                <option>Not Available</option>
+                            {% endif %}
+                        </select>
+                    </div>
+                  <div class="form-group">
+                    <button class="btn btn-outline-dark form-control" type="submit">Search Here</button>
+                  </div>
+                  </form>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}

@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+{% block title %}Project Upload | {{ block.super }}{% endblock %}
+{% load static %}
+{% block content %}
+  <!-- Breadcrumbs-->
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="{% url 'student_dashboard' %}">Student Dashboard</a>
+    </li>
+    <li class="breadcrumb-item active">Upload Project & Doc</li>
+  </ol>
+{% include 'messages/message.html' %}
+
+<div class="container">
+    <form method="post" enctype="multipart/form-data"> {% csrf_token %}
+        <div class="col-lg-12">
+              <h1 class="text-center">Upload Project & Document</h1>
+            <div class="form-row">
+                <div class="form-group col-lg-4 col-md-4">
+                    <label>Name</label>
+                    <input type="text" class="form-control" name="username" value="{{ user.fullname }}">
+                </div>
+                <div class="form-group col-lg-4 col-md-4">
+                    <label>Email</label>
+                    <input type="text" class="form-control" name="email" value="{{ user.email }}">
+                </div>
+                <div class="form-group col-lg-4 col-md-4">
+                    <label>Student ID</label>
+                    <input type="text" class="form-control" name="student_id" value="{{ user.student_id }}">
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="text" name="project_name" required placeholder="Project Name" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Semester Name" name="semester_name" list="semester_name" autocomplete="off">
+                <datalist class="form-control col-lg-12 col-md-12 col-sm-12" id="semester_name" hidden>
+                    <option value="Spring-2021"></option>
+                    <option value="Summer-2021"></option>
+                    <option value="Fall-2021"></option>
+                    <option value="Spring-2022"></option>
+                    <option value="Summer-2022"></option>
+                    <option value="Fall-2022"></option>
+                </datalist>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Course Name" name="course_name" list="course_name" autocomplete="off">
+                <datalist class="form-control" id="course_name" hidden >
+                    <option value="Numerical Analysis with Lab" class="col-lg-12"></option>
+                    <option value="Artificial Intelligence with Lab"></option>
+                    <option value="Advance Database"></option>
+                    <option value="Management Information System"></option>
+                    <option value="Data Structure With Lab"></option>
+                    <option value="Object Oriented Software Development"></option>
+                    <option value="Software Engineering Project II"></option>
+                    <option value="Software Engineering Project I"></option>
+                    <option value="Distributive Computing and Network Security"></option>
+                    <option value="Operating System and system programming"></option>
+                    <option value="Software Engineering Web Application"></option>
+                    <option value="Project/Thesis"></option>
+                    <option value="Algorithms Design & Analysis Lab"></option>
+                    <option value="Software Security"></option>
+                    <option value="Dot net programming with lab"></option>
+                    <option value="Computer fundamental lab"></option>
+                    <option value="Software Quality Assurance & Testing"></option>
+                    <option value="Algorithm Design and Analysis"></option>
+                    <option value="Software Development Project"></option>
+                    <option value="Introduction To Robotics"></option>
+                    <option value="Software Requirement Specifications & Analysis"></option>
+                    <option value="Digital Electronics and Logic Design"></option>
+                    <option value="Software Development Capstone Project"></option>
+                    <option value="Computer Networking with Lab"></option>
+                    <option value="Object Oriented Concept"></option>
+                    <option value="Database management System Lab"></option>
+                    <option value="Design Pattern"></option>
+                    <option value="Computer Architecture"></option>
+                    <option value="Algorithm Design and Analysis Lab"></option>
+                </datalist>
+            </div>
+            <div class="form-group">
+                <input type="text" name="course_code" required placeholder="Course Code" class="form-control" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <select class="form-control" type="text" name="section">
+                    <option selected disabled>--Select Section--</option>
+                    <option>A</option>
+                    <option>B</option>
+                    <option>C</option>
+                    <option>D</option>
+                    <option>E</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" name="desc" placeholder="Description" style="height: 150px"></textarea>
+            </div>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroupFileAddon01">Upload Project</span>
+              </div>
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" name="projectFile" id="project_up"
+                  aria-describedby="inputGroupFileAddon01">
+                <label class="custom-file-label" for="project_up">Choose file</label>
+              </div>
+            </div>
+            <br>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroupFileAddon01">Upload Document</span>
+              </div>
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" name="docFile" id="inputGroupFile01"
+                  aria-describedby="inputGroupFileAddon01">
+                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+              </div>
+            </div>
+            <br>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroupFileAddon01">Upload Project Thumbnail</span>
+              </div>
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" name="thumbnail" id="thumbnail"
+                  aria-describedby="inputGroupFileAddon01">
+                <label class="custom-file-label" for="thumbnail">Choose file</label>
+              </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <input class="btn btn-outline-primary" type="submit" style="margin: auto; display: block" value="Submit">
+            </div>
+        </div>
+    </form>
+</div><!-- container -->
+    {% if uploaded_file_url %}
+        <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+    {% endif %}
+{#<script>#}
+{#    $(document).ready(function () {#}
+{#    var semester = [#}
+{#        "Spring-2021", "Summer-2021", "Fall-2021",  "Spring-2022", "Summer-2022", "Fall-2022"#}
+{#    ]#}
+{#    var courseName = [#}
+{#        "Software Engineering Web Application",#}
+{#        "Operating System and system programming",#}
+{#        "Distributive Computing and Network Security",#}
+{#        "Software Engineering Project I",#}
+{#        "Software Engineering Project II",#}
+{#        "Object Oriented Software Development",#}
+{#        "Data Structure",#}
+{#        "Management Information System",#}
+{#        "Advance Database",#}
+{#        "Artificial Intelligence with Lab",#}
+{#        "Numerical Analysis with Lab",#}
+{#        "Algorithm Design and Analysis Lab",#}
+{#        "Computer Architecture",#}
+{#        "Design Pattern",#}
+{#        "Database management System Lab",#}
+{#        "Object Oriented Concept",#}
+{#        "Computer Networking with Lab",#}
+{#        "Software Development Capstone Project",#}
+{#        "Digital Electronics and Logic Design",#}
+{#        "Introduction to Robotics",#}
+{#        "Software Requirement Analysis & Design",#}
+{#        "Software Requirement Specifications & Analysis",#}
+{#        "Management Information System",#}
+{#        "Introduction To Robotics",#}
+{#        "Software Development Project",#}
+{#        "Algorithm Design and Analysis",#}
+{#        "Software Quality Assurance & Testing",#}
+{#        "Computer fundamental lab",#}
+{#        "Dot net programming with lab",#}
+{#        "Software Security",#}
+{#        "Algorithms Design & Analysis Lab",#}
+{#        "Project/Thesis"#}
+{#    ]#}
+{#    $("#semester_name").select2({#}
+{#       data:semester#}
+{#    });#}
+{#    $("#course_name").select2({#}
+{#       data:courseName#}
+{#    });#}
+{#});#}
+{#</script>#}
+{% endblock %}

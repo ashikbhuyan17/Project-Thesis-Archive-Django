@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Project Details | {{ block.super }}{% endblock %}
+{% load static %}
+{% block content %}
+<div class="container">
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="{% url 'student_dashboard' %}">Student Dashboard</a>
+    </li>
+    <li class="breadcrumb-item active">Project Details</li>
+</ol>
+        <h1 style="text-align: center">Project Details</h1>
+    <table class="table" >
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Project Name</th>
+              <th scope="col">Description</th>
+              <th scope="col">Project File</th>
+              <th scope="col">Document</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">{{ project }}</th>
+              <td>{{ project.description }}</td>
+              <td><a href="{{ project.project_file.url }}">Download</a></td>
+              <td><a href="{{ project.document.url }}">Download</a></td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+
+</div>
+{% endblock %}

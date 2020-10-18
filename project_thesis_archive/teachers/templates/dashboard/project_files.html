@@ -1,0 +1,51 @@
+{% extends 'teacher_base.html' %}
+{% block title %}Project Files | {{ block.super }}{% endblock %}
+{% load static %}
+{% block content %}
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="{% url 'teacher_dashboard' %}">Teacher Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Search Result</li>
+          </ol>
+          <br>
+            <h3>Showing result for:</h3>
+            <div class="form-group">
+                <label>Semester: {{ get_method.semester_name  }}</label>
+            </div>
+            <div class="form-group">
+                <label>Section: {{ get_method.section  }}</label>
+            </div>
+            <div class="form-group">
+                <label>Course Name: {{ get_method.course_name  }}</label>
+            </div>
+            <div class="form-group">
+                <label>Course Code: {{ get_method.course_code  }}</label>
+            </div>
+          <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Student ID</th>
+              <th scope="col">Project Name</th>
+              <th scope="col">Description</th>
+              <th scope="col">Project File</th>
+              <th scope="col">Document</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% if projects %}
+              {% for project in projects %}
+                 <tr>
+                      <td>{{ project.student_id }}</td>
+                      <td>{{ project.project_name }}</td>
+                      <td>{{ project.description }}</td>
+                      <td><a href="{{ project.project_file.url }}">Download</a></td>
+                      <td><a href="{{ project.document.url }}">Download</a></td>
+                 </tr>
+              {% endfor %}
+          {% else %}
+              <h3>No data found. <a href="{% url 'project_choice' %}">click here</a> for search again!</h3>
+          {% endif %}
+          </tbody>
+        </table>
+{% endblock %}

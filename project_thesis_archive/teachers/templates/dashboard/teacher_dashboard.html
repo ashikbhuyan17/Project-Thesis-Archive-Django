@@ -1,0 +1,28 @@
+{% extends 'teacher_base.html' %}
+{% block title %}Dashboard | {{ block.super }}{% endblock %}
+{% load static %}
+{% block content %}
+{% if messages %}
+    <span class="messages col-lg-12 col-sm-12 col-md-12">
+        {% for message in messages %}
+            <span {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                    {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                        {% include 'messages/message.html' %}
+                    {% endif %}
+            </span>
+        {% endfor %}
+    </span>
+{% endif %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+            <img class="img-fluid img-thumbnail" style="height: 300px; width: 500px" src="{% static 'images/project.jpg' %}">
+            <a class="example_e col-lg-11 col-md-11" style="text-decoration: none; text-align: center" href="{% url 'project_choice' %}">Show Available Projects</a>
+        </div>
+        <div class="col-lg-6 col-md-6">
+            <img class="img-fluid img-thumbnail" style="height: 300px; width: 500px" src="{% static 'images/thesis' %}">
+            <a class="example_e col-lg-11 col-md-11" style="text-decoration: none; text-align: center" href="{% url 'thesis_choice' %}">Show Available Thesis</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

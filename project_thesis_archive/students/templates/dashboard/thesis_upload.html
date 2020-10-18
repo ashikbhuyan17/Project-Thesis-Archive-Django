@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% block title %}Thesis Upload | {{ block.super }}{% endblock %}
+{% load static %}
+{% block content %}
+<!-- Breadcrumbs-->
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="{% url 'student_dashboard' %}">Student Dashboard</a>
+    </li>
+    <li class="breadcrumb-item active">Upload Project & Doc</li>
+</ol>
+{% include 'messages/message.html' %}
+<div class="container">
+    <form method="post" enctype="multipart/form-data"> {% csrf_token %}
+        <div class="col-lg-12">
+              <h1 class="text-center">Upload Thesis Paper</h1>
+            <div class="form-row">
+                <div class="form-group col-lg-4 col-md-4">
+                    <label>Name</label>
+                    <input type="text" class="form-control" name="username" value="{{ user.fullname }}">
+                </div>
+                <div class="form-group col-lg-4 col-md-4">
+                    <label>Email</label>
+                    <input type="text" class="form-control" name="email" value="{{ user.email }}">
+                </div>
+                <div class="form-group col-lg-4 col-md-4">
+                    <label>Student ID</label>
+                    <input type="text" class="form-control" name="student_id" value="{{ user.student_id }}">
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="text" name="thesis_title" placeholder="Thesis Title" class="form-control">
+            </div>
+            <div class="form-group">
+                <select class="form-control" type="text" name="semester_name">
+                    <option selected disabled>--Select Semester--</option>
+                    <option>Summer 20</option>
+                    <option>Fall 20</option>
+                    <option>Spring 20</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <select class="form-control" type="text" name="course_name">
+                    <option selected disabled>--Select Course Name--</option>
+                    <option>Project-I</option>
+                    <option>Project-II</option>
+                    <option>Project-II</option>
+                    <option>Thesis</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <select class="form-control" type="text" name="course_code">
+                    <option selected disabled>--Select Course Code--</option>
+                    <option>SWE425</option>
+                    <option>SWE427</option>
+                    <option>SWE423</option>
+                    <option>SWE428</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <select class="form-control" type="text" name="section">
+                    <option selected disabled>--Select Section--</option>
+                    <option>A</option>
+                    <option>B</option>
+                    <option>C</option>
+                    <option>D</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" name="desc" placeholder="Description" style="height: 150px"></textarea>
+            </div>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroupFileAddon01">Upload Thesis Document</span>
+              </div>
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" name="thesis_up" id="thesis_up"
+                  aria-describedby="inputGroupFileAddon01">
+                <label class="custom-file-label" for="thesis_up">Choose file</label>
+              </div>
+            </div>
+            <br>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroupFileAddon01">Upload Thesis Thumbnail</span>
+              </div>
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" name="thumbnail" id="thumbnail"
+                  aria-describedby="inputGroupFileAddon01">
+                <label class="custom-file-label" for="thumbnail">Choose file</label>
+              </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <input class="btn btn-outline-primary" type="submit" style="margin: auto; display: block" value="Submit">
+            </div>
+        </div>
+    </form>
+</div><!-- container -->
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Thesis Details | {{ block.super }}{% endblock %}
+{% load static %}
+{% block content %}
+<div class="container">
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="{% url 'student_dashboard' %}">Student Dashboard</a>
+    </li>
+    <li class="breadcrumb-item active">Thesis Details</li>
+</ol>
+        <h1 style="text-align: center">Thesis Details</h1>
+    <table class="table" >
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Thesis Title</th>
+              <th scope="col">Description</th>
+              <th scope="col">Thesis File</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">{{ thesis }}</th>
+              <td>{{ thesis.description }}</td>
+              <td><a href="{{ thesis.thesis_file.url }}">Download</a></td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
