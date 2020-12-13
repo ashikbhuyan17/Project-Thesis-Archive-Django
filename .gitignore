@@ -1,0 +1,11 @@
+### Django ###
+*.log
+*.pot
+*.pyc
+__pycache__/
+ptaenv
+firstenv
+blog
+.idea
+db.sqlite3
+db.sqlite3-journal
